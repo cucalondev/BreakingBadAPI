@@ -1,15 +1,16 @@
 <template>
   <div>
-    <ListaPersonajes />
+    <ListaPersonajes textoBoton="Añadir"/>
   </div>
 </template>
-
 <script>
 import ListaPersonajes from "./components/ListaPersonajes.vue";
+import Buscador from "./components/Buscador.vue";
 export default {
   data: () => ({}),
   components: {
     ListaPersonajes,
+    Buscador,
   },
 };
 </script>

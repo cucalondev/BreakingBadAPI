@@ -1,16 +1,28 @@
 <template>
   <div>
-    <table>
-      <tbody>
-        <tr v-for="todo in result" :key="todo.char_id">
-          <img :src="todo.img" />
+    <div class="container">
+  <div id="app" class="row">
+    <div class="col-md-8 col-sm-offset-2">
+      <input id="input-search" type="text" class="form-control" v-model="entrada" placeholder='Filtrar'>
+    </div>
+  </div>  
+</div>
+        <div id="list-personajes" v-if="personajesFilter && personajesFilter.length">
+        <div class="panel panel-default" v-for="el of personajesFilter" v-bind:key="el.char_id">
           {{
-            todo.name
+            el.name
           }}
+          <img :src="el.img" />
+          <button 
+          @click="añadir" 
+          class="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group">
+          <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-green-500 rounded-full group-hover:w-56 group-hover:h-56"></span>
+          <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-gray-700"></span>
+          <span class="relative">{{this.textoBoton}}</span>
+        </button>
           <br />
-        </tr>
-      </tbody>
-    </table>
+      </div>
+      </div>
   </div>
 </template>
 
@@ -18,8 +30,16 @@
 import axios from "axios";
 export default {
   data: () => ({
-    result: null,
+    entrada:"",
+    personajes: [],
   }),
+  components:{
+   
+  },
+  props: {
+    textoBoton:{
+      type: String,
+    }},
   mounted() {
     this.getTodos();
   },
@@ -29,10 +49,18 @@ export default {
         .get("https://www.breakingbadapi.com/api/characters/")
         .then((response) => {
           console.log(response);
-          this.result = response.data;
+          this.personajes = response.data;
         })
         .catch((e) => console.log(e));
     },
+  },
+  computed: {
+     personajesFilter: function() {
+       let texto = this.entrada;
+       return this.personajes.filter(function(el) {
+         return el.name.toLowerCase().indexOf(texto.toLowerCase()) !== -1;
+       });
+     }
   },
 };
 </script>
