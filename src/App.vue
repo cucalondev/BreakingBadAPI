@@ -3,16 +3,19 @@
     <p>The Breaking Bad</p>
     <label>Buscar por nombre:</label>
     <ListaPersonajes textoBoton="Añadir"/>
+    <ListaFavoritos/>
   </div>
 </template>
 <script>
 import ListaPersonajes from "./components/ListaPersonajes.vue";
 import Buscador from "./components/Buscador.vue";
+import ListaFavoritos from "./components/ListaFavoritos.vue";
 export default {
   data: () => ({}),
   components: {
     ListaPersonajes,
     Buscador,
+    ListaFavoritos,
   },
 };
 </script>

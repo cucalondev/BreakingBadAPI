@@ -1,18 +1,16 @@
 <template>
-    <label>Filtar por nombre o apellido:</label>
-    <br>
-    <input
-        ref="input"
-        v-model="entrada"
-        type="text"
-        placeholder="Filtar"
-        @keydown.enter="enviarFiltro"
-      />
+   <div class="container">
+  <div id="app" class="row">
+    <div class="col-md-8 col-sm-offset-2">
+      <input id="input-search" type="text" class="form-control" v-model="entrada" placeholder='Filtrar'>
+    </div>
+  </div>  
+</div>
 </template>
 <script>
 export default{
     name:'Buscador',
-    emits: ["enviaEntrada"],
+    emits:["enviaEntrada"],
     props:{
             limpiarFiltro:{
                 type:Boolean,
@@ -30,6 +28,7 @@ export default{
             if (this.limpiarFiltro) this.entrada = "";   
             this.$refs.input.focus();
     }
+    
   }
     };
 </script>

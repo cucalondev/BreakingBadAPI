@@ -1,11 +1,7 @@
 <template>
     <div>
-        <div class="panel panel-default" v-for="el of listaFavoritos" v-bind:key="el.char_id">
-          {{
-            el.name
-          }}
-          <img :src="el.img" />
-          <br />
+        <div class="panel panel-default" v-for="el of ListaFavoritos" v-bind:key="el.char_id">
+          {{el}}
       </div>
     </div>
 </template>
