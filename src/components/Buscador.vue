@@ -1,8 +1,16 @@
 <template>
    <div class="container">
   <div id="app" class="row">
-    <div class="col-md-8 col-sm-offset-2">
-      <input id="input-search" type="text" class="form-control" v-model="entrada" placeholder='Filtrar'>
+    <div class="relative flex w-full flex-wrap items-stretch mb-3">
+      <input
+        :entrada="entrada"
+        id="personaje"
+        @input="updateProp('entrada', $event)"
+        type="text"
+        name="personaje"
+        class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring w-full pr-10"
+        
+        />
     </div>
   </div>  
 </div>
@@ -10,25 +18,21 @@
 <script>
 export default{
     name:'Buscador',
-    emits:["enviaEntrada"],
+    emits: ["update:entrada"],
     props:{
             limpiarFiltro:{
                 type:Boolean,
                 default:false,
-            }
+            },
+            entrada: {
+          type: String,
+          required: true,
         },
-        data(){
-            return{
-            entrada:"",
-            }
         },
         methods:{
-            enviarFiltro(){   
-            this.$emit("enviaEntrada", this.entrada);  
-            if (this.limpiarFiltro) this.entrada = "";   
-            this.$refs.input.focus();
-    }
-    
+          updateProp(prop, { target: { value } }) {
+          this.$emit(`update:${prop}`, value);
+},
   }
     };
 </script>

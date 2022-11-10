@@ -1,7 +1,5 @@
 <template>
   <div>
-    <p>The Breaking Bad</p>
-    <label>Buscar por nombre:</label>
     <ListaPersonajes textoBoton="Añadir"/>
     <ListaFavoritos/>
   </div>
