@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <div class="grid place-items-center">
+  <div class="grid h-screen place-items-center">
     <img class="w-60 h-70" id="logoIndex" src="./assets/LogoIndex.png"/>
-  </div>
     <ListaPersonajes textoBoton="Añadir"/>
     <ListaFavoritos/>
   </div>

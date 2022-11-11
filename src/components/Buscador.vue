@@ -9,7 +9,6 @@
         type="text"
         name="personaje"
         class="px-3 py-3 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring w-full pr-10"
-        
         />
     </div>
   </div>  
