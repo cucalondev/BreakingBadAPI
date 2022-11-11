@@ -1,6 +1,6 @@
 <template>
   <div v-if="mostrar">
-  <ListaFavoritos :ListaFavoritos="personajesFavoritos"/>
+  <ListaFavoritos :ListaFavoritos="personajesFavoritos"  @eliminarFavorito="eliminarFavorito"/>
   <button 
           @click="mostrar=false,limpiarEntrada()"
           class="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gray-800 rounded-lg group">
@@ -36,22 +36,27 @@
       </div>
       </div>
   </div>
-  
+  <div v-if="loading">
+    <Spinner/>
+  </div>
 </template>
 <script>
 import axios from "axios";
 import ListaFavoritos from "../components/ListaFavoritos.vue";
 import Buscador from "../components/Buscador.vue";
+import Spinner from "../components/Spinner.vue";
 export default {
   data: () => ({
     entrada:"",
     personajes: [],
     personajesFavoritos:[],
-    mostrar:false
+    mostrar:false,
+    loading:true
   }),
   components:{
     ListaFavoritos,
     Buscador,
+    Spinner
   },
   props: {
     textoBoton:{
@@ -68,13 +73,23 @@ export default {
           console.log(response);
           this.personajes = response.data;
         })
-        .catch((e) => console.log(e));
+        .catch((e) => console.log(e))
+        .finally(() => this.loading = false);
     },
     añadirFavorito(name){
+      if(this.personajesFavoritos.includes(name)){
+        alert("El personaje ya existe en la lista de favoritos");
+        return;
+      }
+      else{
       this.personajesFavoritos.push(name);
+      }
     },
     limpiarEntrada(){
       this.entrada=""
+    },
+    eliminarFavorito(data){
+      this.personajesFavoritos = this.personajesFavoritos.filter((el)=> el !== data);
     }
   },
   computed: {
