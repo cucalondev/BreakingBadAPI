@@ -16,7 +16,7 @@
     </div>
         <div id="list-personajes" v-if="personajesFilter && personajesFilter.length">
         <div class="imax-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" v-for="el of personajesFilter" v-bind:key="el.char_id">
-          <div class="p-5">
+          <div class="p-5">s
         <a href="#">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{el.name}}</h5>
         </a>
