@@ -14,7 +14,7 @@
      <Buscador v-model:entrada="entrada"/><br>
     </div>
         <div id="list-personajes" v-if="personajesFilter && personajesFilter.length">
-        <div class="space-y-56 imax-w-sm bg-white rounded-lg border border-lime-900 shadow-md dark:bg-gray-800 dark:border-gray-700" v-for="el of personajesFilter" v-bind:key="el.char_id">
+        <div class="imax-w-sm bg-white rounded-lg border border-lime-900 shadow-md dark:bg-gray-800 dark:border-gray-700" v-for="el of personajesFilter" v-bind:key="el.char_id">
           <div class="p-5" >
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{el.name}}   <button 
           @click="añadirFavorito(el.name),mostrar=true" fill="currentColor">

@@ -1,7 +1,8 @@
 <template>
   <img class="w-60 h-70" id="logoIndex" src="./assets/LogoIndex.png"/>
+  <MostrarFavoritos/>
+  <ListaPersonajes textoBoton="Añadir"/>
   <div class="grid h-screen place-items-center">
-    <ListaPersonajes textoBoton="Añadir"/>
   <ListaFavoritos/>
   </div>
 </template>
@@ -9,12 +10,14 @@
 import ListaPersonajes from "./components/ListaPersonajes.vue";
 import Buscador from "./components/Buscador.vue";
 import ListaFavoritos from "./components/ListaFavoritos.vue";
+import MostrarFavoritos from "./components/MostrarFavoritos.vue";
 export default {
   data: () => ({}),
   components: {
     ListaPersonajes,
     Buscador,
     ListaFavoritos,
+    MostrarFavoritos,
   },
 };
 </script>
