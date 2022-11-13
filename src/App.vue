@@ -1,8 +1,8 @@
 <template>
+  <img class="w-60 h-70" id="logoIndex" src="./assets/LogoIndex.png"/>
   <div class="grid h-screen place-items-center">
-    <img class="w-60 h-70" id="logoIndex" src="./assets/LogoIndex.png"/>
     <ListaPersonajes textoBoton="Añadir"/>
-    <ListaFavoritos/>
+  <ListaFavoritos/>
   </div>
 </template>
 <script>
@@ -34,8 +34,5 @@ p{
  color:blue;
  font-size:20px;
  text-align:center;
-}
-template{
-  background-color:black;
 }
 </style>
