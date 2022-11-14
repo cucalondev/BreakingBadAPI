@@ -26,7 +26,7 @@
      <Buscador v-model:entrada="entrada"/><br>
     </div>
         <div id="list-personajes" v-if="personajesFilter && personajesFilter.length">
-        <div class=" my-5 imax-w-sm bg-white rounded-lg border border-lime-900 shadow-md dark:bg-gray-800 dark:border-lime-900" v-for="el of personajesFilter" v-bind:key="el.char_id">
+        <div class="relative my-5 imax-w-sm bg-white rounded-lg border border-lime-900 shadow-md dark:bg-gray-800 dark:border-lime-900" v-for="el of personajesFilter" v-bind:key="el.char_id">
           <div class="p-5" >
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{el.name}}   <button id="btn"
           @click="añadirFavorito(el)?mostrar=true:mostrar=false" fill="currentColor">
@@ -35,15 +35,7 @@
           </svg>
         </button></h5>
           <img class="rounded-t-lg" :src="el.img" />
-          <button @click="verDetalles(el)"
-        type="button" 
-        class="px-4 py-3 left-60
-         bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-        </svg>
-      </button>
-      <MostrarDetalles :ListaDetalles="detalles"/>
+      <MostrarDetalles :elementoDetalles="el"/>
         </div>
       </div>
       </div>
@@ -64,10 +56,10 @@ export default {
     entrada:"",
     personajes: [],
     personajesFavoritos:[],
-    detalles:[],
     mostrar:false,
     loading:true,
     contador:0,
+    mostrarDetalles:false
   }),
   components:{
     ListaFavoritos,
@@ -111,9 +103,6 @@ export default {
     eliminarFavorito(data){
       this.personajesFavoritos = this.personajesFavoritos.filter((el)=> el !== data);
     },
-    verDetalles(el){
-      this.detalles.push(el);
-    }
   },
   computed: {
      personajesFilter: function() {
