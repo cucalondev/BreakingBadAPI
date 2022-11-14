@@ -1,10 +1,7 @@
 <template>
-  <img class="w-60 h-70" id="logoIndex" src="./assets/LogoIndex.png"/>
-  <MostrarFavoritos/>
+  <img class="border-none w-60 h-70" id="logoIndex" src="./assets/LogoIndex.png"/>
   <ListaPersonajes textoBoton="Añadir"/>
-  <div class="grid h-screen place-items-center">
   <ListaFavoritos/>
-  </div>
 </template>
 <script>
 import ListaPersonajes from "./components/ListaPersonajes.vue";
@@ -29,13 +26,5 @@ img {
   margin-right: 10px;
   border: 2px solid black;
   border-radius: 3px;
-}
-#logoIndex{
-  border:none;
-}
-p{
- color:blue;
- font-size:20px;
- text-align:center;
 }
 </style>
