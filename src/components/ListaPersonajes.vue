@@ -1,6 +1,5 @@
 <template>
   <div v-if="mostrar">
-    <AlertAñadido/>
   <ListaFavoritos :ListaFavoritos="personajesFavoritos"  @eliminarFavorito="eliminarFavorito"/>
   <button 
           @click="mostrar=false,limpiarEntrada()"
@@ -11,27 +10,42 @@
         </button>
   </div>
 <div v-else>
-  <div v-if="noMostrar">
-    <AlertNoAñadido/>
-  </div>
+  <br><br>
+  <div>
+    <div class="flex border-b-2 border-grey-dark  rounded-lg overflow-hidden">
+      <button @click="mostrar=true"
+        class="inline-flex text-white bg-lime-900 items-center shadow-border bg-blue hover:bg-blue-dark text-sm py-3 px-6 font-sans tracking-wide font-bold">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path
+            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+        Favoritos {{this.contador}}
+      </button>
+    </div>
   <div>
      <Buscador v-model:entrada="entrada"/><br>
     </div>
+    <MostrarDetalles :ListaDetalles="detalles"/>
         <div id="list-personajes" v-if="personajesFilter && personajesFilter.length">
         <div class=" my-5 imax-w-sm bg-white rounded-lg border border-lime-900 shadow-md dark:bg-gray-800 dark:border-lime-900" v-for="el of personajesFilter" v-bind:key="el.char_id">
           <div class="p-5" >
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{el.name}}   <button 
-          @click="añadirFavorito(el)?mostrar=true:noMostrar=true" fill="currentColor">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{el.name}}   <button id="btn"
+          @click="añadirFavorito(el)?mostrar=true:mostrar=false" fill="currentColor">
           <svg class="h-4 w-4 text-yellow-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
           </svg>
         </button></h5>
           <img class="rounded-t-lg" :src="el.img" />
-          <button @click="mostrarDetalles=true">Ver Detalles</button>
-          <div v-if="mostrarDetalles">
-            {{el.birthday}}
-          </div>
+          <button @click="verDetalles(el)"
+        type="button" 
+        class="px-4 py-3 left-60
+         bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
         </div>
+      </div>
       </div>
       </div> 
       <div v-if="loading">
@@ -44,24 +58,22 @@ import axios from "axios";
 import ListaFavoritos from "../components/ListaFavoritos.vue";
 import Buscador from "../components/Buscador.vue";
 import Spinner from "../components/Spinner.vue";
-import AlertAñadido from "../components/AlertAñadido.vue";
-import AlertNoAñadido from "../components/AlertNoAñadido.vue";
+import MostrarDetalles from "../components/MostrarDetalles.vue";
 export default {
   data: () => ({
     entrada:"",
     personajes: [],
     personajesFavoritos:[],
+    detalles:[],
     mostrar:false,
-    noMostrar:false,
     loading:true,
-    mostrarDetalles:false,
+    contador:0,
   }),
   components:{
     ListaFavoritos,
     Buscador,
     Spinner,
-    AlertAñadido,
-    AlertNoAñadido,
+    MostrarDetalles,
   },
   props: {
     textoBoton:{
@@ -84,10 +96,12 @@ export default {
     },
     añadirFavorito(name){
       if(this.personajesFavoritos.includes(name)){
+
         return false;
       }
       else{
       this.personajesFavoritos.push(name);
+      this.contador++;
       return true;
       }
     },
@@ -97,6 +111,10 @@ export default {
     eliminarFavorito(data){
       this.personajesFavoritos = this.personajesFavoritos.filter((el)=> el !== data);
     },
+    verDetalles(el){
+      this.detalles.push(el);
+      return true;
+    }
   },
   computed: {
      personajesFilter: function() {
