@@ -25,7 +25,6 @@
   <div>
      <Buscador v-model:entrada="entrada"/><br>
     </div>
-    <MostrarDetalles :ListaDetalles="detalles"/>
         <div id="list-personajes" v-if="personajesFilter && personajesFilter.length">
         <div class=" my-5 imax-w-sm bg-white rounded-lg border border-lime-900 shadow-md dark:bg-gray-800 dark:border-lime-900" v-for="el of personajesFilter" v-bind:key="el.char_id">
           <div class="p-5" >
@@ -44,6 +43,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
         </svg>
       </button>
+      <MostrarDetalles :ListaDetalles="detalles"/>
         </div>
       </div>
       </div>
@@ -113,7 +113,6 @@ export default {
     },
     verDetalles(el){
       this.detalles.push(el);
-      return true;
     }
   },
   computed: {

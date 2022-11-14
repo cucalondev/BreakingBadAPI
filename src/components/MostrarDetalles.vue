@@ -1,6 +1,7 @@
 <template>
     <div class="panel panel-default" v-for="el of ListaDetalles" v-bind:key="el.char_id">
-      {{el.name}}
+      Birthday:{{el.birthday}}
+      
   </div>
 </template>
 <script>
