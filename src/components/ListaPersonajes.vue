@@ -24,6 +24,9 @@
         </button></h5>
           <img class="rounded-t-lg" :src="el.img" />
           <button @click="mostrarDetalles=true">Ver Detalles</button>
+          <div v-if="mostrarDetalles">
+            {{el.birthday}}
+          </div>
       </div>
       </div>
       </div> 
