@@ -1,6 +1,15 @@
 <template>
     <div v-if="show" class="panel panel-default">
-      Birthday: {{elementoDetalles.birthday}}
+      Nickname: {{personajeDetalles.nickname}}<br><br>
+      Birthday: {{personajeDetalles.birthday}}<br><br>
+      Occupations:<br>
+      <ol>
+                <li v-for="el of personajeDetalles.occupation" v-bind:key="el.occupation">
+                  {{ el }}
+                </li>
+      </ol>
+      <br>
+      Status : {{personajeDetalles.status}}
     </div>
     <button @click="show = !show"  class="px-4 py-3 left-60
          bg-blue-600 rounded-md text-white outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform">
@@ -17,9 +26,9 @@ data:()=>{
   }
 },
 props:{
-elementoDetalles:{
+personajeDetalles:{
     type:Object,
     }
-}
+},
 }
 </script>
