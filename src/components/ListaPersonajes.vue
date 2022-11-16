@@ -90,10 +90,9 @@ export default {
     getTodos() {
       axios
         .get("https://www.breakingbadapi.com/api/characters/")
-        .then((response) => {
-          console.log(response);
-          this.personajes = response.data;
-          this.personajeSelected = null;
+        .then((personajes) => {
+          console.log(personajes);
+          this.personajes = personajes.data;
         })
         .catch((e) => console.log(e))
         .finally(() => this.loading = false);

@@ -4,7 +4,6 @@
 </template>
 <script>
 import ListaPersonajes from "@/components/ListaPersonajes.vue";
-import ListaFavoritos from "@/components/ListaFavoritos.vue";
 export default {
   data: () => ({}),
   components: {

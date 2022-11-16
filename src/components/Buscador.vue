@@ -32,10 +32,6 @@ export default{
     name:'Buscador',
     emits: ["update:entrada"],
     props:{
-            limpiarFiltro:{
-                type:Boolean,
-                default:false,
-            },
             entrada: {
           type: String,
           required: true,
